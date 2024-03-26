@@ -1,7 +1,25 @@
 from typing import List
+from itertools import combinations
 
 def finding_shared_motif(s: List[str]):
-    pass
+
+    motif = 'A'
+    shortest = min(s, key=len)
+
+    s.remove(shortest)
+
+    for i in range(len(shortest)):
+        length = 0
+        present = True
+        while present:
+            for sequence in s:
+                if shortest[i:i+length] not in sequence or length > 1000:
+                    present = False
+                    break
+            if present:
+                motif = max(shortest[i:i+length], motif, key=len)
+            length += 1
+    return motif
 
 
 if __name__ == '__main__':
@@ -19,4 +37,4 @@ if __name__ == '__main__':
         else:
             current_seq = current_seq + line.strip()
 
-    finding_shared_motif(sequences)
+    print(finding_shared_motif(sequences))

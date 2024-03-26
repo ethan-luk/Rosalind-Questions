@@ -7,7 +7,6 @@ def locate_restriction_sites(seq):
             if i + length > len(seq):
                 break
             if seq[i:i+length] == dna_complement(seq[i:i+length]):
-                print(i + 1, length)
                 res.append((i + 1, length))
     return res
 
@@ -22,4 +21,4 @@ if __name__ == '__main__':
         if not line.startswith('>'):
             seq = seq + line.strip()
 
-    a = locate_restriction_sites(seq)
+    print(locate_restriction_sites(seq))

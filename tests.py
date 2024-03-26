@@ -5,6 +5,7 @@ from counting_point_mutations import counting_point_mutations
 from dna_complement import dna_complement
 from dna_to_rna import dna_to_rna
 from enumerate_gene_orders import enumerate_gene_orders
+from finding_a_shared_motif import finding_shared_motif
 from finding_motif_in_dna import finding_motif_in_dna
 from finding_spliced_motif import find_spliced_motif
 from locating_restriction_sites import locate_restriction_sites
@@ -60,6 +61,11 @@ def test_enumerate_gene_orders():
     assert length == 6
     assert orders == [(1,2,3), (1,3,2), (2,1,3),(2,3,1),(3,1,2),(3,2,1)]
     
+def test_finding_shared_motif():
+    sequences = ['GATTACA', 'TAGACCA', 'ATACA']
+
+    assert finding_shared_motif(sequences) == 'CA'
+    
 def test_finding_motif_in_dna():
     a = 'GATATATGCATATACTT'
     b = 'ATAT'
@@ -75,7 +81,8 @@ def test_finding_spliced_motif():
 def test_locating_restriction_sites():
     seq = 'TCAATGCATGCGGGTCTATATGCAT'
 
-    assert locate_restriction_sites(seq) == [(4, 6), (5, 4), (6, 6), (7, 4), (17, 4), (18, 4), (21, 4)]
+    assert locate_restriction_sites(seq) == [(4, 6), (5, 4), (6, 6), (7, 4), (17, 4), (18, 4), (20, 6), (21, 4)]
+
 def test_open_reading_frames():
     seq = 'AGCCATGTAGCTAACTCAGGTTACATGGGGATGACCCCGCGACTTGGATTAGAGTCTCTTTTGGAATAAGCCTGAATGATCCGAGTAGCATCTCAG'
 
